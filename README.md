@@ -12,5 +12,7 @@ This engine calculates every possible combination of moves up to a certain depth
 
 
 All credit in-script
+
 Use with credit
+
 Feedback appreciated
