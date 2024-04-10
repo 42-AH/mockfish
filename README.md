@@ -18,8 +18,11 @@ All credit in-script.
 Use with credit.
 
 Thanks for any feedback
-
-.SH COPYRIGHT
+.
+.
+.
+.
+LEGAL-
 Copyright (C) 2023 42-AH
 
 This program is free software: you can redistribute it and/or modify
