@@ -63,7 +63,7 @@ kingstable = [
     20, 30, 10, 0, 0, 10, 30, 20
 ]
 
-#https://medium.com/dscvitpune/lets-create-a-chess-ai-8542a12afef (eval function only)
+#https://medium.com/dscvitpune/lets-create-a-chess-ai-8542a12afef
 
 board = chess.Board()
 def evaluate(board, player):
@@ -76,8 +76,8 @@ def evaluate(board, player):
       return 0
   if board.is_insufficient_material():
       return 0
-  if board.is_fivefold_repetition(): #I added this to disourage from fivefold repitition
-      return -100
+  if board.is_fivefold_repetition(): #I added this
+      return 0
   wp = len(board.pieces(chess.PAWN, chess.WHITE))
   bp = len(board.pieces(chess.PAWN, chess.BLACK))
   wn = len(board.pieces(chess.KNIGHT, chess.WHITE))
