@@ -1,4 +1,3 @@
-#https://github.com/42-AH/Mockfish
 
 import sys
 
