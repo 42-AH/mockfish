@@ -16,7 +16,6 @@ All credit in-script.
 
 Use with credit.
 
-Feedback appreciated.
 
 
 
