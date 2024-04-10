@@ -10,8 +10,8 @@ board = chess.Board()
 
 
 def minimax(board, depth, alpha, beta, is_maximizing):
-  score = evaluate(board, is_maximizing) 
   if depth == 0 or board.is_game_over():
+      score = evaluate(board, board.turn) 
       return score
   if is_maximizing:
       max_eval = float('-inf')
@@ -42,7 +42,7 @@ def find_best_move(board, original_depth):
   best_move = None
   for move in board.legal_moves:
       board.push(move)
-      eval = minimax(board, original_depth, alpha, beta, not board.turn)
+      eval = minimax(board, original_depth, alpha, beta, False)
       board.pop()
       if eval > best_eval:
           best_eval = eval
