@@ -1,5 +1,3 @@
-#This is all me
-
 import math
 
 import chess
