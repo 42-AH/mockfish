@@ -16,3 +16,17 @@ All credit in-script
 Use with credit
 
 Feedback appreciated
+
+
+
+
+
+
+Help!
+
+1) Why does depth 2 beat depth 3?
+2) Why does depth 2 pretty much only use horses?
+3) Why do depth 1 & 3 favor moving pawns?
+4) How can I improve this in any way? (Besides getting a GUI, I am working on it)
+
+Thanks for any feedback
