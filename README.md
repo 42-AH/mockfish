@@ -4,7 +4,7 @@ A minimax chess engine
 
 https://replit.com/@42AH/Mockfish-A-minimax-chess-engine
 
-Mockfish is a low-level chess AI, powered by the minimax algorithm
+Mockfish is a low-level chess AI, powered by the minimax algorithm, using alpha-beta pruning
 Currently depth can only be set up to three, without extreme wait time (unless you use PyPy.)
 
 Minmax is a decision rule used in artificial intelligence, decision theory, game theory, statistics, and philosophy for minimizing the possible loss for a worst case scenario.
