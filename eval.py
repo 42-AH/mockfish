@@ -68,7 +68,7 @@ kingstable = [
 board = chess.Board()
 def evaluate(board, player):
   if board.is_checkmate():
-      if not board.turn:
+      if board.turn:
           return 9999
       else:
           return -9999
@@ -106,3 +106,4 @@ def evaluate(board, player):
     return eval  
   else:
     return -eval
+
