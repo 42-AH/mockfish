@@ -1,3 +1,5 @@
+#https://github.com/42-AH/Mockfish
+
 import sys
 
 import chess
@@ -28,7 +30,7 @@ board.turn = chess.WHITE
 while not board.is_game_over():
     check()
     if board.turn:
-        move = find_best_move(board, 2)
+        move = find_best_move(board, 3)
         print("WHITE")
     else:
         move = find_best_move(board, 3)
