@@ -22,6 +22,6 @@ Use with credit.
 
 
 
-If you know why the winning bot will go into a draw (specifically five-fold repitition,) please help.
+If it is a forced mate-in-4, but its depth is 3, it will just move random pieces around, not putting pressure on the king. Help?
 
 Thanks for any feedback
