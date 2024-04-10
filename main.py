@@ -31,7 +31,7 @@ while not board.is_game_over():
         move = find_best_move(board, 2)
         print("WHITE")
     else:
-        move = find_best_move(board, 1)
+        move = find_best_move(board, 3)
         print("BLACK")
     board.push(move)
     print(board)
