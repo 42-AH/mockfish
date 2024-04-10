@@ -2,8 +2,6 @@ import chess
 
 #https://www.chessprogramming.org/Simplified_Evaluation_Function
 
-import chess
-
 def evaluate(board, player_is_white):
     if board.is_checkmate():
         return 9999 if board.turn else -9999
