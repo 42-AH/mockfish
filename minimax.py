@@ -9,7 +9,7 @@ board = chess.Board()
 
 def minimax(board, depth, alpha, beta, is_maximizing):
   if depth == 0 or board.is_game_over():
-      score = evaluate(board, board.turn) 
+      score = evaluate(board, is_maximizing) 
       return score
   if is_maximizing:
       max_eval = float('-inf')
