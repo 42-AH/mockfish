@@ -1,10 +1,8 @@
 import chess
 
-#https://www.chessprogramming.org/Simplified_Evaluation_Function
-
-def evaluate(board, player_is_white):
+def evaluate(board, maximizing):
     if board.is_checkmate():
-        return 9999 if board.turn else -9999
+        return 9999 if not maximizing else -9999
     if board.is_stalemate() or board.is_insufficient_material() or board.is_fivefold_repetition():
         return 0
 
@@ -16,7 +14,7 @@ def evaluate(board, player_is_white):
         chess.QUEEN: 900
     }
 
-    player_color = chess.WHITE if player_is_white else chess.BLACK
+    player_color = chess.WHITE if board.turn else chess.BLACK
     opponent_color = not player_color
 
     material = sum((len(board.pieces(piece, player_color)) - len(board.pieces(piece, opponent_color))) * value for piece, value in piece_values.items())
@@ -82,4 +80,5 @@ def evaluate(board, player_is_white):
 
     total_evaluation = material + piece_square_eval
 
-    return total_evaluation if player_is_white else -total_evaluation
+    return total_evaluation if maximizing else -total_evaluation
+
