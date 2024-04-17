@@ -75,6 +75,9 @@ def evaluate(board, maximizing):
                        20,  30,  10,   0,   0,  10,  30,  20]
     }
 
+    if player_color == chess.BLACK:
+      for piece in piece_square_tables:
+        piece_square_tables[piece] = piece_square_tables[piece][::-1]
     piece_square_eval = sum(piece_square_tables[piece][square] for piece in piece_square_tables for square in board.pieces(piece, player_color))
     piece_square_eval -= sum(piece_square_tables[piece][chess.square_mirror(square)] for piece in piece_square_tables for square in board.pieces(piece, opponent_color))
 
