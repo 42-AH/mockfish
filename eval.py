@@ -2,7 +2,7 @@ import chess
 
 def evaluate(board, maximizing):
     if board.is_checkmate():
-        return 9999 if not maximizing else -9999
+        return -9999 if board.turn else 9999
     if board.is_stalemate() or board.is_insufficient_material() or board.is_fivefold_repetition():
         return 0
 
@@ -75,12 +75,13 @@ def evaluate(board, maximizing):
                        20,  30,  10,   0,   0,  10,  30,  20]
     }
 
-    if player_color == chess.BLACK:
-      for piece in piece_square_tables:
-        piece_square_tables[piece] = piece_square_tables[piece][::-1]
-    piece_square_eval = sum(piece_square_tables[piece][square] for piece in piece_square_tables for square in board.pieces(piece, player_color))
-    piece_square_eval -= sum(piece_square_tables[piece][chess.square_mirror(square)] for piece in piece_square_tables for square in board.pieces(piece, opponent_color))
 
+    if board.turn:
+        piece_square_eval = sum(piece_square_tables[piece][square] for piece in piece_square_tables for square in board.pieces(piece, player_color))
+        piece_square_eval -= sum(piece_square_tables[piece][chess.square_mirror(square)] for piece in piece_square_tables for square in board.pieces(piece, opponent_color))
+    else:
+        piece_square_eval = sum(piece_square_tables[piece][chess.square_mirror(square)] for piece in piece_square_tables for square in board.pieces(piece, player_color))
+        piece_square_eval -= sum(piece_square_tables[piece][square] for piece in piece_square_tables for square in board.pieces(piece, opponent_color))
     total_evaluation = material + piece_square_eval
 
     return total_evaluation if maximizing else -total_evaluation
