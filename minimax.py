@@ -40,10 +40,11 @@ def find_best_move(board, original_depth):
   best_move = None
   for move in board.legal_moves:
       board.push(move)
-      eval = minimax(board, original_depth, alpha, beta, False)
+      eval = minimax(board, original_depth, alpha, beta, board.turn)
       board.pop()
       if eval > best_eval:
           best_eval = eval
           best_move = move
       alpha = max(alpha, eval)
+  return best_move
   return best_move
