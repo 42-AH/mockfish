@@ -41,8 +41,9 @@ while not board.is_game_over():
     print(" ")
 check()
 
-
+"""
 user_move = input("Move: ")
 move = chess.Move.from_uci(user_move)
 board.push(move)
 print("WHITE")
+"""
