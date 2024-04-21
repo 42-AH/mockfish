@@ -28,12 +28,12 @@ board.turn = chess.WHITE
 while not board.is_game_over():
     check()
     if board.turn:
-        user_move = input("Move: ")
-        move = chess.Move.from_uci(user_move)
-        board.push(move)
+        move = find_best_move(board, 3)
         print("WHITE")
+        board.push(move)
+        print("Score: " + str(evaluate(board, True)))
     else:
-        move = find_best_move(board, 4)
+        move = find_best_move(board, 2)
         print("BLACK")
         board.push(move)
         print("Score: " + str(evaluate(board, False)))
@@ -42,4 +42,7 @@ while not board.is_game_over():
 check()
 
 
-
+user_move = input("Move: ")
+move = chess.Move.from_uci(user_move)
+board.push(move)
+print("WHITE")
