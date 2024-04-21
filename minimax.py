@@ -37,14 +37,20 @@ def find_best_move(board, original_depth):
   alpha = float("-inf")
   beta = float("inf")
   best_eval = -math.inf
+  worst_eval = math.inf
   best_move = None
   for move in board.legal_moves:
       board.push(move)
       eval = minimax(board, original_depth, alpha, beta, board.turn)
       board.pop()
-      if eval > best_eval:
-          best_eval = eval
-          best_move = move
-      alpha = max(alpha, eval)
-  return best_move
+      if board.turn:
+        if eval > best_eval:
+              best_eval = eval
+              best_move = move
+        alpha = max(alpha, eval)
+      else:
+        if eval < worst_eval:
+                worst_eval = eval
+                best_move = move
+        beta = min(beta, eval)
   return best_move
