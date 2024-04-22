@@ -20,7 +20,7 @@ e2e4
 g1f3
 
 Board:
-
+```
 Move: e2e4 
 WHITE
 r n b q k b n r
@@ -64,6 +64,7 @@ p p p p p p p p
 . . . . . N . .
 P P P P . P P P
 R N B Q K B . R
+```
 
 # OTHER
 Use with credit.
