@@ -14,6 +14,11 @@ Currently depth can only be set up to three or four, without extreme wait time (
 Minmax is a decision rule used in artificial intelligence, decision theory, game theory, statistics, and philosophy for minimizing the possible loss for a worst case scenario.
 This engine calculates every possible combination of moves up to a certain depth, and assignes each ending a score. The higher the score (or lower, if it is the minimizer,) the better the move. 
 
+MOVEMENT:
+Type the square your moving from, and the square your moving to. No spaces.
+Examples:
+e2e4
+g1f3
 
 Use with credit.
 Thanks for any feedback.
