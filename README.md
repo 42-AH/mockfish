@@ -14,7 +14,7 @@ Minmax is a decision rule used in artificial intelligence, decision theory, game
 This engine calculates every possible combination of moves up to a certain depth, and assignes each ending a score. The higher the score (or lower, if it is the minimizer,) the better the move. 
 
 # MOVEMENT
-Type the square your moving from, and the square your moving to. No spaces.
+Type the square your moving from, and the square your moving to.
 Examples:
 e2e4
 g1f3
