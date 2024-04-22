@@ -1,10 +1,11 @@
 # Mockfish
+## A minimax chess engine
+### https://replit.com/@42AH/Mockfish-A-minimax-chess-engine
 
 ![Mockfish1](https://github.com/42-AH/Mockfish/assets/162044943/5608db62-b128-449d-a010-fa8ca6a57051)
 
-A minimax chess engine
 
-https://replit.com/@42AH/Mockfish-A-minimax-chess-engine
+
 
 
 Mockfish is a low-level chess AI, powered by the minimax algorithm, using alpha-beta pruning, created by 42-AH.
