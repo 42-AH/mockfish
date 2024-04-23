@@ -67,7 +67,7 @@ P P P P . P P P
 R N B Q K B . R
 ```
 ### ELO
-Depth 3 has an estimated 2000 ELO
+Depth 3 has an estimated 2000 ELO.
 Depth 4 has much more, but is too slow (at least on my current setup,) for me to spend the time to get an estimate.
 
 
