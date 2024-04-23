@@ -3,7 +3,7 @@ import chess
 def evaluate(board, maximizing):
     player_color = chess.WHITE if board.turn else chess.BLACK
     opponent_color = not player_color
-    
+
     if board.is_checkmate():
         return -9999 if board.turn else 9999
     if board.is_stalemate() or board.is_insufficient_material() or board.is_fivefold_repetition():
@@ -17,7 +17,7 @@ def evaluate(board, maximizing):
         chess.QUEEN: 900
     }
 
- 
+
     material = sum((len(board.pieces(piece, player_color)) - len(board.pieces(piece, opponent_color))) * value for piece, value in piece_values.items())
 
     piece_square_tables = {
@@ -86,4 +86,3 @@ def evaluate(board, maximizing):
     total_evaluation = material + piece_square_eval
 
     return total_evaluation if maximizing else -total_evaluation
-
