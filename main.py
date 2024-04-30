@@ -23,7 +23,7 @@ def check():
   if board.is_fivefold_repetition():
     print("Fivefold repitition")
     sys.exit()
-board = chess.Board("1q2k3/2q5/8/8/8/8/8/K7") 
+board = chess.Board() 
 board.turn = chess.WHITE
 while not board.is_game_over():
     check()
