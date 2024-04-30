@@ -23,7 +23,7 @@ def check():
   if board.is_fivefold_repetition():
     print("Fivefold repitition")
     sys.exit()
-board = chess.Board() 
+board = chess.Board("1q2k3/2q5/8/8/8/8/8/K7") 
 board.turn = chess.WHITE
 while not board.is_game_over():
     check()
@@ -32,9 +32,9 @@ while not board.is_game_over():
         move = chess.Move.from_uci(user_move)
         board.push(move)
         print("WHITE")
-        print("Score: " + str(evaluate(board, True)))
+        print("Score: " + str(evaluate(board, False)))
     else:
-        move = find_best_move(board, 4)
+        move = find_best_move(board, 3)
         print("BLACK")
         board.push(move)
         print("Score: " + str(evaluate(board, False)))
