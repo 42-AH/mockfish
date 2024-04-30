@@ -50,8 +50,6 @@ def find_best_move(board, original_depth):
                   best_move = move
             alpha = max(alpha, eval)
           else:
-            print(best_move)
-            print(worst_eval)
             if eval < worst_eval:
                     worst_eval = eval
                     best_move = move
