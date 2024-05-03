@@ -1,5 +1,5 @@
 # Mockfish
-## A minimax chess engine
+## A Minimax Chess Engine
 ### https://replit.com/@42AH/Mockfish-A-minimax-chess-engine
 
 ![Mockfish1](https://github.com/42-AH/Mockfish/assets/162044943/5608db62-b128-449d-a010-fa8ca6a57051)
@@ -66,10 +66,6 @@ p p p p p p p p
 P P P P . P P P
 R N B Q K B . R
 ```
-### ELO
-Depth 3 has an estimated 2100 ELO.
-Depth 4 has much more, but is too slow (at least on my current setup,) for me to spend the time to get an estimate.
-
 
 ## Copyright
 
