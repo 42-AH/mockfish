@@ -69,7 +69,7 @@ R N B Q K B . R
 ## DOWNLOADING
 Put these things into your terminal:
 ### Clone the repository
-```git clone https://github.com/username/repository.git```
+```git clone https://github.com/42-AH/Mockfish-0.1.2```
 
 ### Navigate into the repository directory
 ```cd repository```
