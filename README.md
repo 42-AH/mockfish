@@ -69,20 +69,20 @@ R N B Q K B . R
 ## DOWNLOADING
 Put these things into your terminal:
 ### Clone the repository
-'''git clone https://github.com/username/repository.git'''
+```git clone https://github.com/username/repository.git```
 
 ### Navigate into the repository directory
-'''cd repository'''
+```cd repository```
 
 ### Explore the contents of the directory (optional)
-'''ls  # Linux/macOS
-dir # Windows'''
+```ls  # Linux/macOS```
+```dir # Windows```
 
 ### Install dependencies
-'''pip install -r requirements.txt'''
+```pip install -r requirements.txt```
 
 ### Run the application
-'''python main.py'''
+```python main.py```
 
 
 
