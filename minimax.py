@@ -9,7 +9,7 @@ board = chess.Board()
 
 def minimax(board, depth, alpha, beta, is_maximizing):
       if depth == 0 or board.is_game_over():
-          score = evaluate(board, board.turn) 
+          score = evaluate(board, board.turn)
           if score == 9999 or -9999:
               score = score * (depth + 1)
           return score
