@@ -66,6 +66,27 @@ p p p p p p p p
 P P P P . P P P
 R N B Q K B . R
 ```
+## DOWNLOADING
+Put these things into your terminal:
+# Clone the repository
+git clone https://github.com/username/repository.git
+
+# Navigate into the repository directory
+cd repository
+
+# Explore the contents of the directory (optional)
+ls  # Linux/macOS
+dir # Windows
+
+# Install dependencies
+pip install -r requirements.txt
+
+# Run the application
+python main.py
+
+
+
+
 
 ## Copyright
 
