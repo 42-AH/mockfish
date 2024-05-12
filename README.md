@@ -84,6 +84,8 @@ Put these things into your terminal:
 ### Run the application
 ```python main.py```
 
+### Convert to a .exe
+```#pyinstaller --onefile main.py```
 
 
 
