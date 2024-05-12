@@ -85,7 +85,8 @@ Put these things into your terminal:
 ```python main.py```
 
 ### Convert to a .exe
-```#pyinstaller --onefile main.py```
+```pip install pyinstaller```
+```pyinstaller --onefile main.py```
 
 
 
