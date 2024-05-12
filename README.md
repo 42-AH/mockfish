@@ -8,7 +8,7 @@
 
 
 
-Mockfish is a low-level chess AI, powered by the minimax algorithm, using alpha-beta pruning, created by 42-AH.
+Mockfish is a low-level chess AI, powered by the minimax algorithm, using alpha-beta pruning.
 
 ## MINIMAX
 Minmax is a decision rule used in artificial intelligence, decision theory, game theory, statistics, and philosophy for minimizing the possible loss for a worst case scenario.
@@ -93,6 +93,7 @@ Put these things into your terminal:
 This program is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License as published by the Free Software Foundation, either version 3 of the License, or (at your option) any later version.
 This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License for more details.
 You should have received a copy of the GNU General Public License along with this program. If not, see http://www.gnu.org/licenses/.
+
 
 
 
