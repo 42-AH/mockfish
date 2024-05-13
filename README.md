@@ -8,7 +8,7 @@
 
 
 
-Mockfish is a low-level chess AI, powered by the minimax algorithm, using alpha-beta pruning.
+Mockfish is a low-level chess AI, powered by the minimax algorithm, using alpha-beta pruning, written in 100% Python
 
 ## MINIMAX
 Minmax is a decision rule used in artificial intelligence, decision theory, game theory, statistics, and philosophy for minimizing the possible loss for a worst case scenario.
