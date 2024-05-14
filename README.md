@@ -33,8 +33,6 @@ You should have received a copy of the GNU General Public License along with thi
 
 ## GUI
 I made a simple UI, using tkinter, so that you didn't have to put in chess notations.
-![GUI](https://github.com/42-AH/Mockfish/blob/main/Pictures_ignore/image.jpg?raw=true)
-
 
 
 Copyright (C) 2023 42-AH
