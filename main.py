@@ -1,11 +1,21 @@
 import sys
+import tkinter as tk
 import chess
-from eval import evaluate
+from chess_ui import ChessUI
+import tkinter as tk
+from PIL import Image, ImageTk
+import os
+import chess
 from minimax import find_best_move
+import sys
+import math
+
+
 
 print("MOCKFISH")
 print("Copyright (C) 2023 42-AH")
 print("All rights reserved")
+
 
 def check(board):
     if board.is_checkmate():
@@ -25,14 +35,13 @@ def check(board):
         print("Fivefold repetition")
         sys.exit()
 
+
 def main():
     board = chess.Board()
-    turn = "NONE"
 
     while True:
-        turn = input("WHITE OR BLACK: ").upper()
-        if turn in ["WHITE", "BLACK"]:
-            print("")
+        player_color = input("Choose your color (WHITE/BLACK): ").upper()
+        if player_color in ["WHITE", "BLACK"]:
             break
         else:
             print("Invalid input. Please enter 'WHITE' or 'BLACK'.")
@@ -40,46 +49,11 @@ def main():
     depth = int(input("DEPTH: "))
     print("")
 
-    if turn == "WHITE":
-        while not board.is_game_over():
-            check(board)
-            if board.turn:
-                print("WHITE TO MOVE")
-                user_move = input("Move: ")
-                move = chess.Move.from_uci(user_move)
-                if move in board.legal_moves:
-                    board.push(move)
-                else:
-                    print("Invalid move. Please enter a legal move.")
-                    continue
-                print("Score: " + str(evaluate(board, False)))
-            else:
-                print("BLACK TO MOVE")
-                move = find_best_move(board, depth)
-                board.push(move)
-                print("Score: " + str(evaluate(board, False)))
-            print(board)
-            print(" ")
-        check(board)
-    else:
-        while not board.is_game_over():
-            check(board)
-            if board.turn:
-                print("WHITE TO MOVE")
-                move = find_best_move(board, depth)
-                board.push(move)
-                print("Score: " + str(evaluate(board, False)))
-            else:
-                print("BLACK TO MOVE")
-                user_move = input("Move: ")
-                move = chess.Move.from_uci(user_move)
-                if move in board.legal_moves:
-                    board.push(move)
-                else:
-                    print("Invalid move. Please enter a legal move.")
-                    continue
-                print("Score: " + str(evaluate(board, False)))
-            print(board)
-            print(" ")
+    root = tk.Tk()
+    chess_ui = ChessUI(root, depth, player_color)
+    root.mainloop()
+
+
+
 if __name__ == "__main__":
     main()
