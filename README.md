@@ -33,6 +33,6 @@ You should have received a copy of the GNU General Public License along with thi
 
 ## GUI
 I made a simple UI, using tkinter, so that you didn't have to put in chess notations.
-
+![UI](/images/Ignore1.xcf)
 
 Copyright (C) 2023 42-AH
