@@ -3,6 +3,15 @@ from PIL import Image, ImageTk
 import os
 import chess
 from minimax import find_best_move
+import sys
+
+
+def resource_path(relative_path):
+    if hasattr(sys, '_MEIPASS'):
+        base_path = sys._MEIPASS
+    else:
+        base_path = os.path.abspath(os.path.dirname(__file__))
+    return os.path.join(base_path, relative_path)
 
 class ChessUI:
     def __init__(self, master, depth, player_color):
@@ -35,12 +44,14 @@ class ChessUI:
             if move in self.board.legal_moves:
                 self.place_piece(move)
                 self.selected_square = None
+
     def load_pieces(self):
         self.piece_images = {}
-        for filename in os.listdir("assets"):
+        assets_path = resource_path("assets")
+        for filename in os.listdir(assets_path):
             if filename.endswith(".ico"):
                 name = filename.split(".")[0]
-                image = Image.open(os.path.join("assets", filename))
+                image = Image.open(os.path.join(assets_path, filename))
                 image = image.resize((100, 100))
                 self.piece_images[name] = ImageTk.PhotoImage(image)
 
