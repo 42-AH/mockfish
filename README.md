@@ -13,84 +13,17 @@ Mockfish is a low-level chess AI, powered by the minimax algorithm, using alpha-
 ## MINIMAX
 Minmax is a decision rule used in artificial intelligence, decision theory, game theory, statistics, and philosophy for minimizing the possible loss for a worst case scenario.
 This engine calculates every possible combination of moves up to a certain depth, and assignes each ending a score. The higher the score (or lower, depending on the turn,) the better the move. 
-
-## MOVEMENT
-Type the square your moving from, and the square your moving to, no spaces.
-Examples:
-e2e4
-g1f3
-
-Board:
-```
-Move: e2e4 
-WHITE
-r n b q k b n r
-p p p p p p p p
-. . . . . . . .
-. . . . . . . .
-. . . . P . . .
-. . . . . . . .
-P P P P . P P P
-R N B Q K B N R
- 
-BLACK
-Score: 75
-r . b q k b n r
-p p p p p p p p
-. . n . . . . .
-. . . . . . . .
-. . . . P . . .
-. . . . . . . .
-P P P P . P P P
-R N B Q K B N R
- 
-Move: g1f3
-WHITE
-r . b q k b n r
-p p p p p p p p
-. . n . . . . .
-. . . . . . . .
-. . . . P . . .
-. . . . . N . .
-P P P P . P P P
-R N B Q K B . R
- 
-BLACK
-Score: 75
-r . b q k b . r
-p p p p p p p p
-. . n . . n . .
-. . . . . . . .
-. . . . P . . .
-. . . . . N . .
-P P P P . P P P
-R N B Q K B . R
-```
+## MOVING
+Pretty simple, just click where you want to move from to where you want to move
 ## DOWNLOADING
-Put these things into your terminal:
-### Clone the repository
-```git clone https://github.com/42-AH/Mockfish-0.1.2```
-
-### Navigate into the repository directory
-```cd repository```
-
-### Explore the contents of the directory (optional)
-```ls  # Linux/macOS```
-```dir # Windows```
-
-### Install dependencies
+### Install Git
+Install Git from here: https://git-scm.com/downloads
+### Clone the Repository
+```git clone <repository-url>```
+### Navigate to the Repository Directory
+```cd <repository-name>```
+### Install Dependencies
 ```pip install -r requirements.txt```
-
-### Run the application
-```python main.py```
-
-### Convert to a .exe
-```pip install pyinstaller```
-```pyinstaller --onefile main.py```
-
-
-
-
 ## Copyright
 
 This program is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License as published by the Free Software Foundation, either version 3 of the License, or (at your option) any later version.
