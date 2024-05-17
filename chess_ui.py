@@ -13,22 +13,43 @@ def resource_path(relative_path):
         base_path = os.path.abspath(os.path.dirname(__file__))
     return os.path.join(base_path, relative_path)
 
+
 class ChessUI:
-    def __init__(self, master, depth, player_color):
+    def __init__(self, master):
         self.master = master
-        self.master.title("Chess UI")
+        self.master.title("MOCKFISH by 42-AH")
+
+        self.depth = tk.IntVar(value=1)
+        self.color = tk.StringVar(value="WHITE")
+
+        self.create_controls()
         self.canvas = tk.Canvas(master, width=800, height=800)
         self.canvas.pack()
-
         self.board = chess.Board()
         self.selected_square = None
         self.load_pieces()
         self.draw_board()
         self.canvas.bind("<Button-1>", self.on_square_clicked)
-        self.depth = depth
-        self.color = player_color
-        if self.color == "BLACK":
+        self.master.configure(bg="#D2B48C")
+    def start_game(self):
+        self.board.reset()
+        self.draw_board()
+        if self.color.get() == "BLACK":
             self.bot_move()
+
+    def create_controls(self):
+        control_frame = tk.Frame(self.master, bg="#D2B48C")
+        control_frame.pack()
+        start_game_button = tk.Button(control_frame, text="Start Game", command=self.start_game, bg="#D2B48C")
+        start_game_button.pack(side=tk.BOTTOM, pady=10, fill=tk.X)
+        tk.Label(control_frame, text="Difficulty:", bg="#D2B48C").pack(side=tk.LEFT)
+        tk.Radiobutton(control_frame, text="Easy", variable=self.depth, value=1, bg="#D2B48C").pack(side=tk.LEFT)
+        tk.Radiobutton(control_frame, text="Medium", variable=self.depth, value=2, bg="#D2B48C").pack(side=tk.LEFT)
+        tk.Radiobutton(control_frame, text="Hard", variable=self.depth, value=3, bg="#D2B48C").pack(side=tk.LEFT)
+        tk.Label(control_frame, text="                               ", bg="#D2B48C").pack(side=tk.LEFT)
+        tk.Label(control_frame, text="Player Color:", bg="#D2B48C").pack(side=tk.LEFT)
+        tk.Radiobutton(control_frame, text="    ", variable=self.color, value="BLACK", bg="black").pack(side=tk.BOTTOM)
+        tk.Radiobutton(control_frame, text="    ", variable=self.color, value="WHITE", bg="white").pack(side=tk.BOTTOM)
 
     def on_square_clicked(self, event):
         col = event.x // 100
@@ -87,8 +108,9 @@ class ChessUI:
             self.game_over_message()
         else:
             self.bot_move()
+
     def bot_move(self):
-        bot_move = find_best_move(self.board, self.depth)
+        bot_move = find_best_move(self.board, self.depth.get())
         self.board.push(bot_move)
         self.draw_board()
         if self.board.is_game_over():
@@ -106,3 +128,9 @@ class ChessUI:
             print("Insufficient material")
         elif self.board.is_fivefold_repetition():
             print("Fivefold repetition")
+
+
+if __name__ == "__main__":
+    root = tk.Tk()
+    app = ChessUI(root)
+    root.mainloop()
