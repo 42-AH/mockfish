@@ -18,9 +18,9 @@ Pretty simple, just click where you want to move from to where you want to move
 ### Install Git
 Install Git from here: https://git-scm.com/downloads
 ### Clone the Repository
-```git clone <repository-url>```
+```git clone <https://github.com/42-AH/Mockfish>```
 ### Navigate to the Repository Directory
-```cd <repository-name>```
+```cd <Mockfish>```
 ### Install Dependencies
 ```pip install -r requirements.txt```
 ### Install .exe
