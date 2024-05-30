@@ -42,6 +42,9 @@ def find_best_move(board, original_depth):
       best_move = None
       for move in board.legal_moves:
           board.push(move)
+          if board.is_checkmate():
+              board.pop()
+              return(move)
           eval = minimax(board, original_depth, alpha, beta, board.turn)
           board.pop()
           if board.turn:
