@@ -17,7 +17,7 @@ class ChessUI:
         self.master = master
         self.master.title("MOCKFISH by 42-AH")
         self.master.configure(bg="#D2B48C")
-
+        self.started_game = False
         self.depth = tk.IntVar(value=1)
         self.color = tk.StringVar(value="WHITE")
 
@@ -37,7 +37,7 @@ class ChessUI:
         self.canvas.bind("<Button-1>", self.on_square_clicked)
 
     def create_text_frame(self):
-        text_label = tk.Label(self.text_frame, text="Mockfish\n By 42-AH\n https://github.com/42-AH/Mockfish\nCopyright (C) 2023 42-AH\nLiscenced under the GNU GPL", bg="#D2B48C", font=("Arial", 18))
+        text_label = tk.Label(self.text_frame, text="Mockfish\n By 42-AH\n https://github.com/42-AH/Mockfish\nCopyright (C) 2023 42-AH\nLicensed under the GNU GPL", bg="#D2B48C", font=("Arial", 18))
         text_label.pack(pady=20)
 
         back_button = tk.Button(self.text_frame, text="Back to Game", command=self.show_game_frame, bg="#D2B48C")
@@ -52,6 +52,7 @@ class ChessUI:
         self.main_frame.pack(fill=tk.BOTH, expand=True)
 
     def start_game(self):
+        self.started_game = True
         self.board.reset()
         self.draw_board()
         if self.color.get() == "BLACK":
@@ -79,19 +80,24 @@ class ChessUI:
         tk.Radiobutton(control_frame, text="    ", variable=self.color, value="WHITE", bg="white").pack(side=tk.BOTTOM)
 
     def on_square_clicked(self, event):
-        col = event.x // 100
-        row = 7 - (event.y // 100)
-        square = chess.square(col, row)
+        if self.started_game == True:
+            if self.color.get() == "WHITE":
+                col = event.x // 100
+                row = 7 - (event.y // 100)
+                square = chess.square(col, row)
+            else:
+                col = 7 - (event.x // 100)
+                row = event.y // 100
+                square = chess.square(col, row)
 
-        piece = self.board.piece_at(square)
-        if piece is not None and ((piece.color == chess.WHITE and self.board.turn) or
-                                  (piece.color == chess.BLACK and not self.board.turn)):
-            self.selected_square = square
-        elif self.selected_square is not None:
-            move = chess.Move(self.selected_square, square)
-            if move in self.board.legal_moves:
-                self.place_piece(move)
-                self.selected_square = None
+            piece = self.board.piece_at(square)
+            if piece is not None and ((piece.color == chess.WHITE and self.board.turn) or (piece.color == chess.BLACK and not self.board.turn)):
+                self.selected_square = square
+            elif self.selected_square is not None:
+                move = chess.Move(self.selected_square, square)
+                if move in self.board.legal_moves:
+                    self.place_piece(move)
+                    self.selected_square = None
 
     def load_pieces(self):
         self.piece_images = {}
@@ -110,10 +116,12 @@ class ChessUI:
             king_color = chess.WHITE if self.board.turn else chess.BLACK
             king_square = self.board.king(king_color)
             checkmate_king_square = king_square
-
         for row in range(8):
             for col in range(8):
-                square = chess.square(col, 7 - row)
+                if self.color.get() == "WHITE":
+                    square = chess.square(col, 7 - row)
+                else:
+                    square = chess.square(7 - col, row)
                 if square == checkmate_king_square:
                     color = "red"
                 else:
@@ -122,8 +130,8 @@ class ChessUI:
                 piece = self.board.piece_at(square)
                 if piece:
                     piece_name = self.get_piece_name(piece)
-                    self.canvas.create_image(col * 100 + 50, row * 100 + 50, image=self.piece_images[piece_name],
-                                             tags="pieces")
+                    self.canvas.create_image(col * 100 + 50, row * 100 + 50, image=self.piece_images[piece_name], tags="pieces")
+
     def get_piece_name(self, piece):
         piece_map = {
             chess.PAWN: "P",
@@ -164,3 +172,5 @@ class ChessUI:
             print("Insufficient material")
         elif self.board.is_fivefold_repetition():
             print("Fivefold repetition")
+
+
