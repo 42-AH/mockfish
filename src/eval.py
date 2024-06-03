@@ -1,5 +1,9 @@
 import chess
 
+
+def get_square(row, column):
+    return chess.square(column, 7 - row)
+
 def evaluate(board, maximizing):
       player_color = chess.WHITE if board.turn else chess.BLACK
       opponent_color = not player_color
@@ -59,7 +63,7 @@ def evaluate(board, maximizing):
                         5, 10, 10, 10, 10, 10, 10,  5,
                         0,  0,  0,  0,  0,  0,  0,  0,],
 
-          chess.QUEEN: [6,   1,  -8,-20,  69,  24,  88,  26,
+          chess.QUEEN: [6,   1,  -8,-40,  69,  24,  88,  26,
                          14,  32,  60, -10,  20,  76,  57,  24,
                          -2,  43,  32,  60,  72,  63,  43,   2,
                           1, -16,  22,  17,  25,  20, -13,  -6,
@@ -85,5 +89,30 @@ def evaluate(board, maximizing):
           piece_square_eval = sum(piece_square_tables[piece][chess.square_mirror(square)] for piece in piece_square_tables for square in board.pieces(piece, player_color))
           piece_square_eval -= sum(piece_square_tables[piece][square] for piece in piece_square_tables for square in board.pieces(piece, opponent_color))
       total_evaluation = material + piece_square_eval
+
+      doubled_penalty = 30
+      for row in range(8):
+          for column in range(8):
+              square = get_square(row, column)
+              piece = board.piece_at(square)
+
+              if piece and piece.symbol() == "P":
+                  if row + 1 < 8:
+                      piece_above = board.piece_at(get_square(row + 1, column))
+                      if piece_above and piece_above.symbol() == "P":
+                          total_evaluation -= doubled_penalty
+                  if row - 1 >= 0:
+                      piece_below = board.piece_at(get_square(row - 1, column))
+                      if piece_below and piece_below.symbol() == "P":
+                          total_evaluation -= doubled_penalty
+              elif piece and piece.symbol() == "p":
+                  if row + 1 < 8:
+                      piece_above = board.piece_at(get_square(row + 1, column))
+                      if piece_above and piece_above.symbol() == "p":
+                          total_evaluation += doubled_penalty
+                  if row - 1 >= 0:
+                      piece_below = board.piece_at(get_square(row - 1, column))
+                      if piece_below and piece_below.symbol() == "p":
+                          total_evaluation += doubled_penalty
 
       return total_evaluation if maximizing else -total_evaluation
