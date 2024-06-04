@@ -80,7 +80,7 @@ class ChessUI:
         tk.Radiobutton(control_frame, text="    ", variable=self.color, value="WHITE", bg="white").pack(side=tk.BOTTOM)
 
     def on_square_clicked(self, event):
-        if self.started_game == True:
+        if self.started_game:
             if self.color.get() == "WHITE":
                 col = event.x // 100
                 row = 7 - (event.y // 100)
@@ -91,10 +91,14 @@ class ChessUI:
                 square = chess.square(col, row)
 
             piece = self.board.piece_at(square)
-            if piece is not None and ((piece.color == chess.WHITE and self.board.turn) or (piece.color == chess.BLACK and not self.board.turn)):
+            if piece is not None and ((piece.color == chess.WHITE and self.board.turn) or (
+                    piece.color == chess.BLACK and not self.board.turn)):
                 self.selected_square = square
             elif self.selected_square is not None:
                 move = chess.Move(self.selected_square, square)
+                if self.board.piece_at(self.selected_square).piece_type == chess.PAWN and (
+                        square // 8 == 0 or square // 8 == 7):
+                    move = chess.Move(self.selected_square, square, promotion=chess.QUEEN)
                 if move in self.board.legal_moves:
                     self.place_piece(move)
                     self.selected_square = None
