@@ -1,9 +1,12 @@
 import tkinter as tk
+from tkinter import ttk
 from PIL import Image, ImageTk
 import os
 import chess
 from minimax import find_best_move
 import sys
+from eval import evaluate
+
 
 def resource_path(relative_path):
     if hasattr(sys, '_MEIPASS'):
@@ -11,6 +14,7 @@ def resource_path(relative_path):
     else:
         base_path = os.path.abspath(os.path.dirname(__file__))
     return os.path.join(base_path, relative_path)
+
 
 class ChessUI:
     def __init__(self, master):
@@ -29,15 +33,23 @@ class ChessUI:
 
         self.create_controls()
         self.canvas = tk.Canvas(self.main_frame, width=800, height=800)
-        self.canvas.pack()
+        self.canvas.pack(side=tk.LEFT)
+
+        self.eval_frame = tk.Frame(self.main_frame, bg="#D2B48C")
+        self.eval_frame.pack(side=tk.LEFT, fill=tk.Y, padx=20)
+
         self.board = chess.Board()
+        self.create_evaluation_bar()
+
         self.selected_square = None
         self.load_pieces()
         self.draw_board()
         self.canvas.bind("<Button-1>", self.on_square_clicked)
 
     def create_text_frame(self):
-        text_label = tk.Label(self.text_frame, text="Mockfish\n By 42-AH\n https://github.com/42-AH/Mockfish\nCopyright (C) 2023 42-AH\nLicensed under the GNU GPL", bg="#D2B48C", font=("Arial", 18))
+        text_label = tk.Label(self.text_frame,
+                              text="Mockfish\n By 42-AH\n https://github.com/42-AH/Mockfish\nCopyright (C) 2023 42-AH\nLicensed under the GNU GPL",
+                              bg="#D2B48C", font=("Arial", 18))
         text_label.pack(pady=20)
 
         back_button = tk.Button(self.text_frame, text="Back to Game", command=self.show_game_frame, bg="#D2B48C")
@@ -55,6 +67,7 @@ class ChessUI:
         self.started_game = True
         self.board.reset()
         self.draw_board()
+        self.update_evaluation_bar()
         if self.color.get() == "BLACK":
             self.bot_move()
 
@@ -78,6 +91,30 @@ class ChessUI:
         tk.Label(control_frame, text="Player Color:", bg="#D2B48C").pack(side=tk.LEFT)
         tk.Radiobutton(control_frame, text="    ", variable=self.color, value="BLACK", bg="black").pack(side=tk.BOTTOM)
         tk.Radiobutton(control_frame, text="    ", variable=self.color, value="WHITE", bg="white").pack(side=tk.BOTTOM)
+
+    def create_evaluation_bar(self):
+        self.eval_label = tk.Label(self.eval_frame, text="Evaluation", bg="#D2B48C", font=("Arial", 16))
+        self.eval_label.pack(pady=10)
+        self.eval_canvas = tk.Canvas(self.eval_frame, width=50, height=500, bg="#D2B48C")
+        self.eval_canvas.pack(pady=20)
+        self.eval_bar_background = self.eval_canvas.create_rectangle(15, 0, 35, 500, fill="black")
+        self.eval_bar = self.eval_canvas.create_rectangle(15, 500, 35, 500, fill="white")
+
+    def update_evaluation_bar(self):
+        if self.board.is_checkmate():
+            if self.board.turn:
+                eval_percent = 0
+            else:
+                eval_percent = 100
+        else:
+            eval_score = evaluate(self.board, True)
+            static_eval = evaluate(self.board, False)
+            eval_percent = ((eval_score - static_eval) / 100) + 50
+            eval_percent = max(0, min(100, eval_percent))
+
+        bar_length = 500 * (eval_percent / 100)
+        self.eval_canvas.coords(self.eval_bar, 15, 500 - bar_length, 35, 500)
+
 
     def on_square_clicked(self, event):
         if self.started_game:
@@ -134,7 +171,8 @@ class ChessUI:
                 piece = self.board.piece_at(square)
                 if piece:
                     piece_name = self.get_piece_name(piece)
-                    self.canvas.create_image(col * 100 + 50, row * 100 + 50, image=self.piece_images[piece_name], tags="pieces")
+                    self.canvas.create_image(col * 100 + 50, row * 100 + 50, image=self.piece_images[piece_name],
+                                             tags="pieces")
 
     def get_piece_name(self, piece):
         piece_map = {
@@ -152,6 +190,7 @@ class ChessUI:
         self.board.push(move)
         self.draw_board()
         self.master.update()
+        self.update_evaluation_bar()
         if self.board.is_game_over():
             self.game_over_message()
         else:
@@ -161,10 +200,12 @@ class ChessUI:
         bot_move = find_best_move(self.board, self.depth.get())
         self.board.push(bot_move)
         self.draw_board()
+        self.update_evaluation_bar()
         if self.board.is_game_over():
             self.game_over_message()
 
     def game_over_message(self):
+        self.update_evaluation_bar()
         if self.board.is_checkmate():
             if self.board.turn:
                 print("Black won")
