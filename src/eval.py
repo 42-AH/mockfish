@@ -61,7 +61,7 @@ def evaluate(board, maximizing):
                         -10,   0,   0,   0,   0,   0,   0, -10,
                         -10, -10, -20, -10, -10, -20, -10, -10],
 
-        chess.ROOK: [0, 0, 0, 5, 5, 0, 0, 0,
+        chess.ROOK: [0, -75, 0, 5, 5, 0, -75, 0,
                      -5, 0, 0, 0, 0, 0, 0, -5,
                      -5, 0, 0, 0, 0, 0, 0, -5,
                      -5, 0, 0, 0, 0, 0, 0, -5,
@@ -98,10 +98,18 @@ def evaluate(board, maximizing):
                     10, 20, 30, 40, 40, 30, 20, 10,
                     0, 10, 20, 30, 30, 20, 10, 0]
 
-
+    rook_endgame = [0, 0, 0, 5, 5, 0, 0, 0,
+                     -5, 0, 0, 0, 0, 0, 0, -5,
+                     -5, 0, 0, 0, 0, 0, 0, -5,
+                     -5, 0, 0, 0, 0, 0, 0, -5,
+                     -5, 0, 0, 0, 0, 0, 0, -5,
+                     -5, 0, 0, 0, 0, 0, 0, -5,
+                     5, 10, 10, 10, 10, 10, 10, 5,
+                     0, 0, 0, 0, 0, 0, 0, 0, ]
 
     if total < 2000:
         piece_square_tables[chess.KING] = king_endgame
+        piece_square_tables[chess.ROOK] = rook_endgame
     if player_color == chess.WHITE:
         piece_square_eval = sum(piece_square_tables[piece][square] for piece in piece_square_tables for square in
                                 board.pieces(piece, player_color))
