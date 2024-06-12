@@ -22,7 +22,9 @@ This engine calculates every possible combination of moves up to a certain depth
 Pretty simple, just click where you want to move from to where you want to move
 ## Installation
 ```pip install mockfish```
-Or
+
+__Or__
+
 ```
 import os
 os.system("pip install scratchsocket")
