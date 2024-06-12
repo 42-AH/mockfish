@@ -20,15 +20,11 @@ Minmax is a decision rule used in artificial intelligence, decision theory, game
 This engine calculates every possible combination of moves up to a certain depth, and assignes each ending a score. The higher the score (or lower, depending on the turn,) the better the move. 
 ## MOVING
 Pretty simple, just click where you want to move from to where you want to move
-## DOWNLOADING
-### Install Git
-Install Git from here: https://git-scm.com/downloads
-### Clone the Repository
-```git clone <https://github.com/42-AH/Mockfish>```
-### Navigate to the Repository Directory
-```cd <Mockfish>```
-### Install Dependencies
-```pip install -r requirements.txt```
+## Installation
+```pip install mockfish```
+Or
+```import os
+os.system("pip install scratchsocket")```
 ### Install .exe
 ```pyinstaller --onefile --windowed --add-data "assets;assets" main.py```
 ## GUI
