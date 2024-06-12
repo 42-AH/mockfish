@@ -23,8 +23,10 @@ Pretty simple, just click where you want to move from to where you want to move
 ## Installation
 ```pip install mockfish```
 Or
-```import os
-os.system("pip install scratchsocket")```
+```
+import os
+os.system("pip install scratchsocket")
+```
 ### Install .exe
 ```pyinstaller --onefile --windowed --add-data "assets;assets" main.py```
 ## GUI
