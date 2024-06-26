@@ -3,6 +3,8 @@ import chess
 from eval import evaluate
 import concurrent.futures
 import copy
+import chess.polyglot
+
 
 board = chess.Board()
 
@@ -43,6 +45,16 @@ def minimax(board, depth, alpha, beta, is_maximizing):
                 break
         return min_eval
 
+def get_moves_from_book(board, book_file):
+    try:
+        with chess.polyglot.open_reader(book_file) as reader:
+            main_entry = reader.find(board)
+            if main_entry:
+                return main_entry.move
+            else:
+                return None
+    except (IOError, IndexError, ValueError) as e:
+        return None
 def evaluate_move(board, move, original_depth, alpha, beta):
     board_copy = copy.deepcopy(board)
     board_copy.push(move)
@@ -74,5 +86,7 @@ def find_best_move(board, original_depth):
                 beta = min(beta, eval)
             if beta <= alpha:
                 break
-
+    book = get_moves_from_book(board, "performance.bin")
+    if book != None:
+        return book
     return best_move
