@@ -95,10 +95,15 @@ class ChessUI:
     def create_evaluation_bar(self):
         self.eval_label = tk.Label(self.eval_frame, text="Evaluation", bg="#D2B48C", font=("Arial", 16))
         self.eval_label.pack(pady=10)
+
         self.eval_canvas = tk.Canvas(self.eval_frame, width=50, height=500, bg="#D2B48C")
         self.eval_canvas.pack(pady=20)
-        self.eval_bar_background = self.eval_canvas.create_rectangle(15, 0, 35, 500, fill="black")
-        self.eval_bar = self.eval_canvas.create_rectangle(15, 500, 35, 500, fill="white")
+
+        self.eval_bar_background = self.eval_canvas.create_rectangle(0, 0, 75, 500, fill="black")
+        self.eval_bar = self.eval_canvas.create_rectangle(0, 500, 75, 500, fill="white")
+
+        self.eval_score_label = tk.Label(self.eval_frame, text="0", bg="#D2B48C", font=("Arial", 18))
+        self.eval_score_label.place(x=50, y=320, anchor='center')
 
     def update_evaluation_bar(self):
         if self.board.is_checkmate():
@@ -109,12 +114,16 @@ class ChessUI:
         else:
             eval_score = evaluate(self.board, True)
             static_eval = evaluate(self.board, False)
-            eval_percent = ((eval_score - static_eval) / 100) + 50
-            eval_percent = max(0, min(100, eval_percent))
+
+            if eval_score is None or static_eval is None:
+                eval_percent = 50
+            else:
+                eval_percent = ((eval_score - static_eval) / 100) + 50
+                eval_percent = max(0, min(100, eval_percent))
 
         bar_length = 500 * (eval_percent / 100)
-        self.eval_canvas.coords(self.eval_bar, 15, 500 - bar_length, 35, 500)
-
+        self.eval_canvas.coords(self.eval_bar, 0, 500 - bar_length, 75, 500)
+        self.eval_score_label.config(text=str(evaluate(self.board, True) / 100))
 
     def on_square_clicked(self, event):
         if self.started_game:
@@ -217,5 +226,4 @@ class ChessUI:
             print("Insufficient material")
         elif self.board.is_fivefold_repetition():
             print("Fivefold repetition")
-
 
