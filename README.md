@@ -10,11 +10,6 @@
 Mockfish is a low-level chess AI, powered by the minimax algorithm written in 100% Python.
 It has an estimated 1550 ELO on hard mode, with an average accuracy of 87.9%  compared to the leading chess engine.
 
-Minimax contains:
-Alpha-beta pruning, 
-Multi-threading
-
-
 ## MINIMAX
 Minmax is a decision rule used in artificial intelligence, decision theory, game theory, statistics, and philosophy for minimizing the possible loss for a worst case scenario.
 This engine calculates every possible combination of moves up to a certain depth, and assignes each ending a score. The higher the score (or lower, depending on the turn,) the better the move. 
