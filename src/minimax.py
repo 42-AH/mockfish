@@ -7,13 +7,21 @@ from eval import evaluate
 
 board = chess.Board()
 
-# Transposition Table
 transposition_table = {}
+
+piece_values = {
+    chess.PAWN: 100,
+    chess.KNIGHT: 320,
+    chess.BISHOP: 330,
+    chess.ROOK: 500,
+    chess.QUEEN: 900,
+    chess.KING: 9999
+}
 
 
 def move_ordering(board, move):
     board.push(move)
-    if board.is_checkmate:
+    if board.is_checkmate():
         board.pop()
         return 20
     board.pop()
@@ -28,18 +36,25 @@ def transposition_key(board):
     return board.fen()
 
 
-def minimax(board, depth, alpha, beta, is_maximizing):
-    if depth == 0 or board.is_game_over():
-        score = evaluate(board, board.turn)
-        if score == 9999 or score == -9999:
-            score *= (depth + 1)
-        return score
+def material_count(board):
+    material = 0
+    for piece_type in piece_values:
+        material += len(board.pieces(piece_type, chess.WHITE)) * piece_values[piece_type]
+        material += len(board.pieces(piece_type, chess.BLACK)) * piece_values[piece_type]
+    return material
 
+
+def minimax(board, depth, alpha, beta, is_maximizing):
     key = transposition_key(board)
     if key in transposition_table:
         entry = transposition_table[key]
         if entry['depth'] >= depth:
             return entry['eval']
+
+    if depth == 0 or board.is_game_over():
+        score = evaluate(board, is_maximizing)
+        transposition_table[key] = {'eval': score, 'depth': depth}
+        return score
 
     if is_maximizing:
         max_eval = float('-inf')
@@ -92,15 +107,16 @@ def find_best_move(board, original_depth):
     best_eval = -math.inf
     worst_eval = math.inf
     best_move = None
-
+    depth = original_depth
+    if abs(material_count(board)) < 23000:
+        depth += 1
+    print(material_count(board))
     book = get_moves_from_book(board, "performance.bin")
     if book is not None:
         return book
-
     moves = list(sorted(board.legal_moves, key=lambda move: move_ordering(board, move), reverse=True))
-
     with concurrent.futures.ThreadPoolExecutor() as executor:
-        futures = [executor.submit(evaluate_move, board, move, original_depth, alpha, beta) for move in moves]
+        futures = [executor.submit(evaluate_move, board, move, depth, alpha, beta) for move in moves]
         for future in concurrent.futures.as_completed(futures):
             move, eval = future.result()
             if board.turn:
