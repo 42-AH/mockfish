@@ -16,13 +16,13 @@ This engine calculates every possible combination of moves up to a certain depth
 ## MOVING
 Pretty simple, just click where you want to move from to where you want to move
 ## Installation
-```pip install mockfish```
+```pip install git+https://github.com/42-AH/mockfish```
 
 __Or__
 
 ```
 import os
-os.system("pip install mockfish")
+os.system("pip install git+https://github.com/42-AH/mockfish")
 ```
 ### Install .exe
 ```pyinstaller --onefile --windowed --add-data "assets;assets" main.py```
