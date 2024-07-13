@@ -19,17 +19,26 @@ piece_values = {
 }
 
 
+history_table = {}
+
+def update_history(move, depth):
+    if move not in history_table:
+        history_table[move] = 0
+    history_table[move] += depth ** 2
+
 def move_ordering(board, move):
     board.push(move)
     if board.is_checkmate():
         board.pop()
         return 20
     board.pop()
+    score = 0
     if board.gives_check(move):
-        return 10
+        score += 10
     if board.is_capture(move):
-        return 5
-    return 0
+        score += 5
+    score += history_table.get(move, 0)
+    return score
 
 
 def transposition_key(board):
