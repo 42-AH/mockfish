@@ -63,7 +63,7 @@ pip install -r requirements.txt
 To run the mockfish engine, you usually need to execute a Python script that launches it. Commonly, this is done with:
 
 ```
-python main.py
+python src/main.py
 ```
 ## Copyright
 
