@@ -16,19 +16,33 @@ This engine calculates every possible combination of moves up to a certain depth
 ## MOVING
 Pretty simple, just click where you want to move from to where you want to move
 ## Installation
-```pip install git+https://github.com/42-AH/mockfish```
+1. Install Git
+First, make sure you have Git installed on your system. If not, download and install it from git-scm.com.
 
-__Or__
+2. Clone the Repository
+Open a Command Prompt (cmd) and use Git to clone the repository:
+'''
+git clone https://github.com/42-AH/mockfish.git
+'''
+This command will create a local copy of the mockfish repository in a directory named mockfish.
 
-```
-import os
-os.system("pip install git+https://github.com/42-AH/mockfish")
-```
-### Install .exe
-```pyinstaller --onefile --windowed --add-data "assets;assets" main.py```
-## GUI
-I made a simple UI, using tkinter, so that you didn't have to put in chess notations.
+4. Navigate to the Directory
+Change into the mockfish directory:
+'''
+cd mockfish
+'''
+5. Build the Project
+If mockfish is a Go project, you need to build it using Go. Make sure you have Go installed. If not, download and install it from golang.org.
+'''
+go build
+This command compiles the project and generates an executable file in the current directory.
+'''
+6. Run the Executable
+Run the built executable (assuming it’s named mockfish.exe):
 
+'''
+mockfish.exe
+'''
 ## Copyright
 
 Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the “Software”), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
