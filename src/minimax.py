@@ -46,10 +46,8 @@ def material_count(board):
 
 def minimax(board, depth, alpha, beta, is_maximizing):
     key = transposition_key(board)
-    if key in transposition_table:
-        entry = transposition_table[key]
-        if entry['depth'] >= depth:
-            return entry['eval']
+    if key in transposition_table and transposition_table[key]['depth'] >= depth:
+        return transposition_table[key]['eval']
 
     if depth == 0 or board.is_game_over():
         score = evaluate(board, is_maximizing)
@@ -86,20 +84,15 @@ def get_moves_from_book(board, book_file):
     try:
         with chess.polyglot.open_reader(book_file) as reader:
             main_entry = reader.find(board)
-            if main_entry:
-                return main_entry.move
-            else:
-                return None
-    except (IOError, IndexError, ValueError) as e:
+            return main_entry.move if main_entry else None
+    except (IOError, IndexError, ValueError):
         return None
 
-
 def evaluate_move(board, move, original_depth, alpha, beta):
-    board_copy = copy.deepcopy(board)
+    board_copy = board.copy(stack=False)
     board_copy.push(move)
     eval = minimax(board_copy, original_depth - 1, alpha, beta, board_copy.turn)
-    return (move, eval)
-
+    return move, eval
 
 def find_best_move(board, original_depth):
     alpha = float("-inf")
@@ -110,12 +103,11 @@ def find_best_move(board, original_depth):
     depth = original_depth
     if abs(material_count(board)) < 23000:
         depth += 1
-    print(material_count(board))
     book = get_moves_from_book(board, "performance.bin")
     if book is not None:
         return book
     moves = list(sorted(board.legal_moves, key=lambda move: move_ordering(board, move), reverse=True))
-    with concurrent.futures.ThreadPoolExecutor() as executor:
+    with concurrent.futures.ProcessPoolExecutor() as executor:
         futures = [executor.submit(evaluate_move, board, move, depth, alpha, beta) for move in moves]
         for future in concurrent.futures.as_completed(futures):
             move, eval = future.result()
