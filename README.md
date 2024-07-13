@@ -16,33 +16,53 @@ This engine calculates every possible combination of moves up to a certain depth
 ## MOVING
 Pretty simple, just click where you want to move from to where you want to move
 ## Installation
-1. Install Git
-First, make sure you have Git installed on your system. If not, download and install it from git-scm.com.
-
-2. Clone the Repository
-Open a Command Prompt (cmd) and use Git to clone the repository:
-'''
+1. Install Python
+Make sure Python is installed on your system. You can download and install it from the official Python website. Ensure you check the box to add Python to your PATH during installation.
+OR
+If you have git installed:
+```
 git clone https://github.com/42-AH/mockfish.git
-'''
-This command will create a local copy of the mockfish repository in a directory named mockfish.
+```
 
-4. Navigate to the Directory
-Change into the mockfish directory:
-'''
-cd mockfish
-'''
-5. Build the Project
-If mockfish is a Go project, you need to build it using Go. Make sure you have Go installed. If not, download and install it from golang.org.
-'''
-go build
-This command compiles the project and generates an executable file in the current directory.
-'''
-6. Run the Executable
-Run the built executable (assuming it’s named mockfish.exe):
+1. Download or Clone the Mockfish Repository
+Go to the Mockfish GitHub Page:
+Visit the Mockfish GitHub repository.
 
-'''
-mockfish.exe
-'''
+Download the Repository:
+
+Click on the green "Code" button.
+Choose "Download ZIP" to get a ZIP file of the repository.
+Extract the ZIP file to a directory of your choice.
+Alternatively, if you have Git installed, you can clone the repository using the following command:
+
+```
+git clone https://github.com/42-AH/mockfish.git
+```
+This will create a mockfish directory with the repository's files.
+
+3. Install Dependencies
+Open Command Prompt:
+
+Navigate to the Mockfish Directory:
+Use cd to navigate to the directory where you extracted or cloned mockfish. For example:
+
+```
+cd path\to\mockfish
+```
+
+Install Required Packages:
+mockfish has dependencies listed in a requirements.txt file. Install these dependencies using pip:
+
+```
+pip install -r requirements.txt
+```
+
+4. Run Mockfish
+To run the mockfish engine, you usually need to execute a Python script that launches it. Commonly, this is done with:
+
+```
+python main.py
+```
 ## Copyright
 
 Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the “Software”), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
