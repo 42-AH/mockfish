@@ -18,14 +18,6 @@ Pretty simple, just click where you want to move from to where you want to move
 ## Installation
 ### 1. Install Python
 Make sure Python is installed on your system. You can download and install it from the official Python website. Ensure you check the box to add Python to your PATH during installation.
-
-OR
-
-If you have git installed:
-```
-git clone https://github.com/42-AH/mockfish.git
-```
-
 ### 2. Download or Clone the Mockfish Repository
 
 Visit the Mockfish GitHub repository.
