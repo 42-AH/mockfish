@@ -86,7 +86,7 @@ class ChessUI:
         tk.Radiobutton(control_frame, text="Medium", variable=self.depth, value=2, bg="#D2B48C").pack(side=tk.LEFT)
         tk.Radiobutton(control_frame, text="Hard", variable=self.depth, value=3, bg="#D2B48C").pack(side=tk.LEFT)
         tk.Radiobutton(control_frame, text="Extreme", variable=self.depth, value=4, bg="#D2B48C").pack(side=tk.LEFT)
-
+        tk.Radiobutton(control_frame, text="Master", variable=self.depth, value=5, bg="#D2B48C").pack(side=tk.LEFT)
         tk.Label(control_frame, text="                               ", bg="#D2B48C").pack(side=tk.LEFT)
         tk.Label(control_frame, text="Player Color:", bg="#D2B48C").pack(side=tk.LEFT)
         tk.Radiobutton(control_frame, text="    ", variable=self.color, value="BLACK", bg="black").pack(side=tk.BOTTOM)
