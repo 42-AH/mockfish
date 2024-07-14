@@ -120,6 +120,12 @@ def find_best_move(board, original_depth):
         futures = [executor.submit(evaluate_move, board, move, depth, alpha, beta) for move in moves]
         for future in concurrent.futures.as_completed(futures):
             move, eval = future.result()
+            board.push(move)
+            if board.is_checkmate():
+                board.pop()
+                return move
+            board.pop()
+
             if board.turn:
                 if eval > best_eval:
                     best_eval = eval
@@ -132,5 +138,4 @@ def find_best_move(board, original_depth):
                 beta = min(beta, eval)
             if beta <= alpha:
                 break
-
     return best_move
