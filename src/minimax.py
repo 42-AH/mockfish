@@ -124,18 +124,26 @@ def find_best_move(board, original_depth):
             if board.is_checkmate():
                 board.pop()
                 return move
-            board.pop()
-
-            if board.turn:
-                if eval > best_eval:
-                    best_eval = eval
-                    best_move = move
-                alpha = max(alpha, eval)
+            if evaluate(board, True) > 0 and not board.turn or evaluate(board, False) < 0 and board.turn:
+              repetition = 1
             else:
-                if eval < worst_eval:
-                    worst_eval = eval
-                    best_move = move
-                beta = min(beta, eval)
-            if beta <= alpha:
-                break
+              repetition = 0
+            if board.is_fivefold_repetition() and repetition == 1 or not board.is_fivefold_repetition():
+              skip = 0
+            else:
+              skip = 1
+            board.pop()
+            if skip == 0:
+              if board.turn:
+                    if eval > best_eval:
+                        best_eval = eval
+                        best_move = move
+                    alpha = max(alpha, eval)
+              else:
+                    if eval < worst_eval:
+                        worst_eval = eval
+                        best_move = move
+                    beta = min(beta, eval)
+              if beta <= alpha:
+                    break
     return best_move
