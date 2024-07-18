@@ -1,7 +1,5 @@
 import chess
 
-transposition_table = {}
-
 piece_values = {
     chess.PAWN: 100,
     chess.KNIGHT: 320,
@@ -85,12 +83,25 @@ rook_endgame = [0, 0, 0, 5, 5, 0, 0, 0,
                 5, 10, 10, 10, 10, 10, 10, 5,
                 0, 0, 0, 0, 0, 0, 0, 0]
 
-def evaluate(board, maximizing):
-    key = board.fen()
-    if key in transposition_table:
-        entry = transposition_table[key]
-        return entry['eval'] if entry['maximizing'] == maximizing else -entry['eval']
 
+def has_castled(board: chess.Board) -> dict:
+    castling = {
+        'white': False,
+        'black': False
+    }
+
+    if board.has_castling_rights(chess.WHITE):
+        if board.king(chess.WHITE) != chess.E1:
+            if board.piece_at(chess.G1) == chess.KING or board.piece_at(chess.C1) == chess.KING:
+                castling['white'] = True
+
+    if board.has_castling_rights(chess.BLACK):
+        if board.king(chess.BLACK) != chess.E8:
+            if board.piece_at(chess.G8) == chess.KING or board.piece_at(chess.C8) == chess.KING:
+                castling['black'] = True
+
+    return castling
+def evaluate(board, maximizing):
     player_color = chess.WHITE if board.turn else chess.BLACK
     opponent_color = not player_color
 
@@ -136,6 +147,12 @@ def evaluate(board, maximizing):
                     total_evaluation -= doubled_penalty
                 if square - 8 >= 0 and board.piece_at(square - 8) == piece:
                     total_evaluation -= doubled_penalty
+        castling_bonus = 150
+        castling_info = has_castled(board)
+        if castling_info['white']:
+            total_evaluation += castling_bonus
+        if castling_info['black']:
+            total_evaluation -= castling_bonus
 
-    transposition_table[key] = {'eval': total_evaluation, 'maximizing': maximizing}
-    return total_evaluation if maximizing else -total_evaluation
+        return total_evaluation if maximizing else -total_evaluation
+
