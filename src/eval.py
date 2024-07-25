@@ -91,7 +91,7 @@ def evaluate(board, maximizing):
 
     if board.is_checkmate():
         return 9999 if board.turn == chess.BLACK else -9999
-    if board.is_stalemate() or board.is_insufficient_material() or board.is_fivefold_repetition():
+    if board.is_stalemate() or board.is_insufficient_material() or board.is_fivefold_repetition() or board.can_claim_threefold_repetition():
         return 0
 
     material = sum(
