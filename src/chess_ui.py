@@ -226,4 +226,6 @@ class ChessUI:
             print("Insufficient material")
         elif self.board.is_fivefold_repetition():
             print("Fivefold repetition")
+        elif self.board.can_claim_threefold_repetition():
+            print("Threefold Repetition")
 
