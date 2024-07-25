@@ -57,7 +57,7 @@ def minimax(board, depth, alpha, beta, is_maximizing):
     if key in transposition_table and transposition_table[key]['depth'] >= depth:
         return transposition_table[key]['eval']
 
-    if depth == 0 or board.is_game_over():
+    if depth == 0 or board.is_game_over() or board.can_claim_threefold_repetition():
         score = evaluate(board, is_maximizing)
         transposition_table[key] = {'eval': score, 'depth': depth}
         return score
