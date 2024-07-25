@@ -1,7 +1,6 @@
 import math
 import chess
 import concurrent.futures
-import copy
 import chess.polyglot
 from eval import evaluate
 
