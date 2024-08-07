@@ -15,6 +15,13 @@ https://www.chess.com/game/computer/144075111
 
 (BTW the account it was playing on was my alt, my real account is https://www.chess.com/member/42AH)
 
+## Board
+
+<img width="716" alt="image" src="https://github.com/user-attachments/assets/f5f4b4f0-cd15-476e-b231-6ab7b51116ba">
+
+<img width="716" alt="image" src="https://github.com/user-attachments/assets/e0f488e0-5521-4125-9b90-b498799028d3">
+
+
 ## Installation
 ### 1. Install Python
 Make sure Python is installed on your system. You can download and install it from the official Python website. Ensure you check the box to add Python to your PATH during installation.
