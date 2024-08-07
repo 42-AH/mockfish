@@ -16,6 +16,8 @@ https://www.chess.com/game/computer/144075111
 (BTW the account it was playing on was my alt, my real account is https://www.chess.com/member/42AH)
 
 ## Board
+I used tkinter for the GUI, so it is a simple click, click, to move a piece.
+
 <img width="462" alt="image" src="https://github.com/user-attachments/assets/300b8d5c-0fa0-4b99-afd8-8f682309515a">
 
 
