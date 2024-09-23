@@ -185,11 +185,13 @@ def evaluate(board, maximizing):
         piece_squares = board.pieces(piece, player_color)
         opponent_piece_squares = board.pieces(piece, opponent_color)
         if player_color == chess.WHITE:
-            piece_square_eval += sum(piece_square_tables[piece][chess.square_mirror(square)] for square in piece_squares)
+            piece_square_eval += sum(
+                piece_square_tables[piece][chess.square_mirror(square)] for square in piece_squares)
             piece_square_eval -= sum(piece_square_tables[piece][square] for square in opponent_piece_squares)
         else:
             piece_square_eval += sum(piece_square_tables[piece][square] for square in piece_squares)
-            piece_square_eval -= sum(piece_square_tables[piece][chess.square_mirror(square)] for square in opponent_piece_squares)
+            piece_square_eval -= sum(
+                piece_square_tables[piece][chess.square_mirror(square)] for square in opponent_piece_squares)
 
     total_evaluation = material + piece_square_eval
 
