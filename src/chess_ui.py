@@ -200,9 +200,7 @@ class ChessUI:
         self.draw_board()
         self.master.update()
         self.update_evaluation_bar()
-        if self.board.is_game_over():
-            self.game_over_message()
-        else:
+        if not self.board.is_game_over():
             self.bot_move()
 
     def bot_move(self):
@@ -210,22 +208,4 @@ class ChessUI:
         self.board.push(bot_move)
         self.draw_board()
         self.update_evaluation_bar()
-        if self.board.is_game_over():
-            self.game_over_message()
-
-    def game_over_message(self):
-        self.update_evaluation_bar()
-        if self.board.is_checkmate():
-            if self.board.turn:
-                print("Black won")
-            else:
-                print("White won")
-        elif self.board.is_stalemate():
-            print("Draw")
-        elif self.board.is_insufficient_material():
-            print("Insufficient material")
-        elif self.board.is_fivefold_repetition():
-            print("Fivefold repetition")
-        elif self.board.can_claim_threefold_repetition():
-            print("Threefold Repetition")
 
