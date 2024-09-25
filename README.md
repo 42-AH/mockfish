@@ -11,7 +11,7 @@ Mockfish is a low-level chess AI, powered by the minimax algorithm written in 10
 It has an estimated 2000+ ELO on extreme mode.
 
 Here is an example game:
-https://www.chess.com/game/computer/144075111
+[https://www.chess.com/game/computer/144075111](https://www.chess.com/game/computer/161624027)
 
 ## Board
 I used tkinter for the GUI, so it is a simple click, click, to move a piece.
