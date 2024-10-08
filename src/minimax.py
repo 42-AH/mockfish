@@ -52,15 +52,22 @@ def material_count(board):
     return material
 
 
-def minimax(board, depth, alpha, beta, is_maximizing):
+def minimax(board, depth, alpha, beta, is_maximizing, null_move=False):
     key = transposition_key(board)
     if key in transposition_table and transposition_table[key]['depth'] >= depth:
         return transposition_table[key]['eval']
 
-    if depth == 0 or board.is_game_over() or board.can_claim_threefold_repetition():
+    if depth == 0 or board.is_game_over():
         score = evaluate(board, is_maximizing)
         transposition_table[key] = {'eval': score, 'depth': depth}
         return score
+
+    if not null_move and depth >= 3 and not board.is_check():
+        board.push(chess.Move.null())
+        score = -minimax(board, depth - 1 - 2, -beta, -alpha, not is_maximizing, True)
+        board.pop()
+        if score >= beta:
+            return beta
 
     if is_maximizing:
         max_eval = float('-inf')
