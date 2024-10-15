@@ -28,7 +28,7 @@ Make sure Python is installed on your system. You can download and install it fr
 ### 2. Download
 
 ```
-git clone [https://github.com/42-AH/mockfish.git](https://github.com/42-AH/mockfish)
+git clone https://github.com/42-AH/mockfish
 ```
 ```
 cd path\to\mockfish
