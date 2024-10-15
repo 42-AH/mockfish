@@ -42,33 +42,12 @@ Alternatively, if you have Git installed, you can clone the repository using the
 ```
 git clone https://github.com/42-AH/mockfish.git
 ```
-
-This will create a mockfish directory with the repository's files.
-
-### 3. Install Dependencies
-  
-1. Open Command Prompt:
-
-Navigate to the Mockfish Directory:
-
-Use cd to navigate to the directory where you extracted or cloned mockfish. For example:
-
 ```
 cd path\to\mockfish
 ```
-
-Install Required Packages:
-
-mockfish has dependencies listed in a requirements.txt file. Install these dependencies using pip:
-
 ```
-pip install -r requirements.txt
+py -m pip install -r requirements.txt
 ```
-
-### 4. Run Mockfish
-   
-To run the mockfish engine, you usually need to execute a Python script that launches it. Commonly, this is done with:
-
 ```
 python src/main.py
 ```
