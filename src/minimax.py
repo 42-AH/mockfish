@@ -116,8 +116,6 @@ def find_best_move(board, original_depth):
     worst_eval = math.inf
     best_move = None
     depth = original_depth
-    if abs(material_count(board)) < 23000:
-        depth += 1
     book = get_moves_from_book(board, "performance.bin")
     if book is not None:
         return book
