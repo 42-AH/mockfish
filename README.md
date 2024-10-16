@@ -15,7 +15,7 @@ Here is an example game:
 
 ## Installation
 ### 1. Install Python
-Make sure Python is installed on your system. You can download and install it from the official Python website. Ensure you check the box to add Python to your PATH during installation.
+Make sure Python is installed on your system. You can download and install it from the official Python website. Ensure you check the box to add Python to your PATH during installation. Uses UCI interface
 ### 2. Download
 
 ```
