@@ -136,7 +136,7 @@ king_endgame = [
 
 def evaluate(board, maximizing):
 
-    piece_values = {
+    piece_values_midgame = {
         chess.PAWN: 82,
         chess.KNIGHT: 337,
         chess.BISHOP: 365,
@@ -145,64 +145,73 @@ def evaluate(board, maximizing):
         chess.KING: 0
     }
 
-    player_color = chess.WHITE if board.turn else chess.BLACK
-    opponent_color = not player_color
+    piece_values_endgame = {
+        chess.PAWN: 94,
+        chess.KNIGHT: 281,
+        chess.BISHOP: 297,
+        chess.ROOK: 512,
+        chess.QUEEN: 936,
+        chess.KING: 0
+    }
 
     if board.is_checkmate():
-        return 9999 if board.turn == chess.BLACK else -9999
+        return 9999 if not board.turn else -9999
     if board.is_stalemate() or board.is_insufficient_material() or board.is_fivefold_repetition() or board.can_claim_threefold_repetition():
         return 0
 
-    material = sum(
-        (len(board.pieces(piece, player_color)) - len(board.pieces(piece, opponent_color))) * value
-        for piece, value in piece_values.items()
-    )
+    total_material = 0
+    for piece_type in piece_values_midgame:
+        total_material += len(board.pieces(piece_type, chess.WHITE)) * piece_values_midgame[piece_type]
+        total_material += len(board.pieces(piece_type, chess.BLACK)) * piece_values_midgame[piece_type]
 
-    total = sum(
-        (len(board.pieces(piece, player_color)) + len(board.pieces(piece, opponent_color))) * value
-        for piece, value in piece_values.items()
-    )
-
-    if total < 5000:
+    if total_material < 5000:
         piece_square_tables[chess.KING] = king_endgame
         piece_square_tables[chess.QUEEN] = queen_endgame
         piece_square_tables[chess.ROOK] = rook_endgame
         piece_square_tables[chess.BISHOP] = bishop_endgame
         piece_square_tables[chess.KNIGHT] = knight_endgame
         piece_square_tables[chess.PAWN] = pawn_endgame
+        piece_values = piece_values_endgame
+    else:
+        piece_values = piece_values_midgame
 
-        piece_values = {
-                chess.PAWN: 94,
-                chess.KNIGHT: 281,
-                chess.BISHOP: 297,
-                chess.ROOK: 512,
-                chess.QUEEN: 936,
-                chess.KING: 0
-            }
+    material_score = sum(
+        (len(board.pieces(piece, chess.WHITE)) - len(board.pieces(piece, chess.BLACK))) * piece_values[piece]
+        for piece in piece_values
+    )
 
-    piece_square_eval = 0
+    piece_square_score = 0
     for piece in piece_square_tables:
-        piece_squares = board.pieces(piece, player_color)
-        opponent_piece_squares = board.pieces(piece, opponent_color)
-        if player_color == chess.WHITE:
-            piece_square_eval += sum(
-                piece_square_tables[piece][chess.square_mirror(square)] for square in piece_squares)
-            piece_square_eval -= sum(piece_square_tables[piece][square] for square in opponent_piece_squares)
+        for square in board.pieces(piece, chess.WHITE):
+            piece_square_score += piece_square_tables[piece][square]
+        for square in board.pieces(piece, chess.BLACK):
+            piece_square_score -= piece_square_tables[piece][chess.square_mirror(square)]
+
+    king_safety_score = 0
+    if not board.has_castling_rights(chess.WHITE):
+        king_safety_score -= 50
+    if not board.has_castling_rights(chess.BLACK):
+        king_safety_score += 50
+
+    pawn_structure_score = 0
+    for color in [chess.WHITE, chess.BLACK]:
+        pawns = board.pieces(chess.PAWN, color)
+        if color == chess.WHITE:
+            multiplier = 1
         else:
-            piece_square_eval += sum(piece_square_tables[piece][square] for square in piece_squares)
-            piece_square_eval -= sum(
-                piece_square_tables[piece][chess.square_mirror(square)] for square in opponent_piece_squares)
+            multiplier = -1
 
-    total_evaluation = material + piece_square_eval
+        for pawn in pawns:
+            file = chess.square_file(pawn)
+            if len([p for p in pawns if chess.square_file(p) == file]) > 1:
+                pawn_structure_score -= 15 * multiplier
+            adjacent_files = {file - 1, file + 1}
+            if not any(chess.square_file(p) in adjacent_files for p in pawns):
+                pawn_structure_score -= 20 * multiplier
 
-    doubled_penalty = 30
-    for square in chess.SQUARES:
-        piece = board.piece_at(square)
-        if piece:
-            piece_square = piece_square_tables.get(piece.piece_type, [0]*64)
-            if piece.piece_type == chess.PAWN:
-                if square + 8 < 64 and board.piece_at(square + 8) == piece:
-                    total_evaluation -= doubled_penalty
-                if square - 8 >= 0 and board.piece_at(square - 8) == piece:
-                    total_evaluation -= doubled_penalty
-    return total_evaluation if maximizing else -total_evaluation
+    mobility_score = len(list(board.legal_moves)) * (1 if board.turn else -1)
+
+    total_score = (material_score + piece_square_score + king_safety_score +
+                   pawn_structure_score + mobility_score)
+
+    return total_score if maximizing else -total_score
