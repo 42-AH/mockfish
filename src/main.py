@@ -14,11 +14,11 @@ def main():
 
     while True:
         try:
-            depth = int(input("Depth (1-7): "))
-            if 1 <= depth <= 7:
+            depth = int(input("Depth (1-6): "))
+            if 1 <= depth <= 6:
                 break
             else:
-                print("Please enter a depth between 1 and 7.")
+                print("Please enter a depth between 1 and 6.")
         except ValueError:
             print("Invalid input. Please enter an integer.")
 
