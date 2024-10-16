@@ -13,15 +13,6 @@ It has an estimated 2000+ ELO on extreme mode.
 Here is an example game:
 [https://www.chess.com/game/computer/144075111](https://www.chess.com/game/computer/161624027)
 
-## Board
-I used tkinter for the GUI, so it is a simple click, click, to move a piece.
-
-<img width="462" alt="image" src="https://github.com/user-attachments/assets/300b8d5c-0fa0-4b99-afd8-8f682309515a">
-
-
-<img width="462" alt="image" src="https://github.com/user-attachments/assets/e0f488e0-5521-4125-9b90-b498799028d3">
-
-
 ## Installation
 ### 1. Install Python
 Make sure Python is installed on your system. You can download and install it from the official Python website. Ensure you check the box to add Python to your PATH during installation.
