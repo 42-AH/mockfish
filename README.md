@@ -28,7 +28,7 @@ cd path\to\mockfish
 py -m pip install -r requirements.txt
 ```
 ```
-python src/main.py
+py src/main.py
 ```
 
 ## Copyright
