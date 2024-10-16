@@ -37,12 +37,11 @@ def main():
         print("\n")
 
     while not board.is_game_over():
-        print_board(board, color)
-
         while True:
             user_move = input("Your move (in UCI format): ").lower()
             try:
                 board.push_uci(user_move)
+                print_board(board, color)
                 break
             except ValueError:
                 print("Invalid move. Please try again.")
