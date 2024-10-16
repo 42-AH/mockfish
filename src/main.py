@@ -42,6 +42,7 @@ def main():
             try:
                 board.push_uci(user_move)
                 print_board(board, color)
+                print("\n")
                 break
             except ValueError:
                 print("Invalid move. Please try again.")
