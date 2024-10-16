@@ -32,7 +32,7 @@ def main():
     if color == "b":
         ai_move = find_best_move(board, depth)
         board.push(ai_move)
-        print("AI move:")
+        print("AI move:" + str(ai_move))
         print_board(board, color)
         print("\n")
 
@@ -52,7 +52,7 @@ def main():
 
         ai_move = find_best_move(board, depth)
         board.push(ai_move)
-        print("AI move:")
+        print("AI move:" + str(ai_move))
         print_board(board, color)
         print("\n")
 
