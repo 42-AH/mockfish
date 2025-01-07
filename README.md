@@ -8,9 +8,11 @@
 
 
 Mockfish is a low-level chess AI, powered by the minimax algorithm written in 100% Python.
-It has an estimated 2000+ ELO on depth five.
+It has an estimated 2000+ ELO on depth four.
 
 Can consistently beat 2000 rated bots
+
+Level 'Hard' is the best mix between speed and accuracy!
 
 ## Installation
 ### 1. Install Python
@@ -29,6 +31,11 @@ py -m pip install -r requirements.txt
 ```
 py src/main.py
 ```
+
+## GUI
+
+<img width="516" alt="{C8D1F852-81E2-4823-95A2-B77E317D6A6B}" src="https://github.com/user-attachments/assets/64342283-2fb7-41ea-b0b5-e6526d32a807" />
+
 
 ## Copyright
 
