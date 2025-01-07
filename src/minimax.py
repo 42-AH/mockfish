@@ -3,6 +3,8 @@ import chess
 import concurrent.futures
 import chess.polyglot
 from eval import evaluate
+from itertools import islice
+
 
 board = chess.Board()
 
@@ -29,13 +31,13 @@ def move_ordering(board, move):
     board.push(move)
     if board.is_checkmate():
         board.pop()
-        return 20
+        return 10000
     board.pop()
     score = 0
     if board.gives_check(move):
-        score += 10
+        score += 1000
     if board.is_capture(move):
-        score += 5
+        score += 100
     score += history_table.get(move, 0)
     return score
 
@@ -85,7 +87,7 @@ def minimax(board, depth, alpha, beta, is_maximizing, null_move=False):
         min_eval = float('inf')
         for move in sorted(board.legal_moves, key=lambda move: move_ordering(board, move)):
             board.push(move)
-            eval = minimax(board, depth - 1, alpha, beta, True)
+            eval = minimax(board, depth - 1, alpha, beta, True)  # Recursive call
             board.pop()
             min_eval = min(min_eval, eval)
             beta = min(beta, eval)
@@ -103,11 +105,13 @@ def get_moves_from_book(board, book_file):
     except (IOError, IndexError, ValueError):
         return None
 
+
 def evaluate_move(board, move, original_depth, alpha, beta):
     board_copy = board.copy(stack=False)
     board_copy.push(move)
     eval = minimax(board_copy, original_depth - 1, alpha, beta, board_copy.turn)
     return move, eval
+
 
 def find_best_move(board, original_depth):
     alpha = float("-inf")
@@ -131,25 +135,25 @@ def find_best_move(board, original_depth):
                 board.pop()
                 return move
             if evaluate(board, True) > 0 and not board.turn or evaluate(board, False) < 0 and board.turn:
-              repetition = 1
+                repetition = 1
             else:
-              repetition = 0
+                repetition = 0
             if board.is_fivefold_repetition() and repetition == 1 or not board.is_fivefold_repetition():
-              skip = 0
+                skip = 0
             else:
-              skip = 1
+                skip = 1
             board.pop()
             if skip == 0:
-              if board.turn:
+                if board.turn:
                     if eval > best_eval:
                         best_eval = eval
                         best_move = move
                     alpha = max(alpha, eval)
-              else:
+                else:
                     if eval < worst_eval:
                         worst_eval = eval
                         best_move = move
                     beta = min(beta, eval)
-              if beta <= alpha:
+                if beta <= alpha:
                     break
     return best_move
