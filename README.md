@@ -34,7 +34,7 @@ py src/main.py
 
 ## GUI
 
-<img width="516" alt="{C8D1F852-81E2-4823-95A2-B77E317D6A6B}" src="https://github.com/user-attachments/assets/64342283-2fb7-41ea-b0b5-e6526d32a807" />
+<img width="553" alt="{725D14F3-F375-40F8-A65A-42B441539FBC}" src="https://github.com/user-attachments/assets/e994ad27-9bd8-4e4d-8b42-4c114c9f30d1" />
 
 
 ## Copyright
