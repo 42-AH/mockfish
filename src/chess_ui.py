@@ -213,4 +213,3 @@ class ChessUI:
         self.board.push(bot_move)
         self.draw_board()
         self.update_evaluation_bar()
-
