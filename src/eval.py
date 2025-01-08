@@ -1,5 +1,4 @@
 import chess
-from functools import lru_cache
 
 piece_square_tables = {
     chess.PAWN: [
@@ -64,7 +63,6 @@ piece_square_tables = {
     ]
 }
 
-@lru_cache(maxsize=10000)
 def evaluate(board, maximizing):
     piece_values = {
         chess.PAWN: 82,
